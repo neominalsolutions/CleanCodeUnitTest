@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace HalkBank.ConsoleApp.Accounting
 {
@@ -50,6 +52,39 @@ namespace HalkBank.ConsoleApp.Accounting
     //  // bu değer sadece contructor içerisinde gönderilebilir.
     //  // this.LastName = lname;
     //}
+
+    /// <summary>
+    /// Güncel hesap üzerindeki belirli tarih aralarında hesap dökümü
+    /// </summary>
+    /// <param name="accountNumber"></param>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+    /// <returns></returns>
+    public IReadOnlyList<AccountTransaction> GetTransactionAt(string accountNumber,DateTime startDate, DateTime endDate)
+    {
+      var acc = GetCurrentAccount(accountNumber);
+
+      return acc.Transactions.Where(x => x.TransactionAt.Date >= startDate.Date && x.TransactionAt.Date <= endDate.Date).ToList().AsReadOnly();
+
+    }
+
+    /// <summary>
+    /// Şuan aktif hesap bilgisini döner.
+    /// </summary>
+    /// <param name="accountNumber"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public Account GetCurrentAccount(string accountNumber)
+    {
+      var account = accounts.FirstOrDefault(x => x.AccountNumber == accountNumber);
+
+      if (account is null)
+        throw new Exception("Böyle bir hesap bulunamadı");
+
+      return account;
+    }
+
+
 
   }
 }

@@ -20,7 +20,10 @@ namespace HalkBank.ConsoleApp.Accounting
     // hesaba yapılan günlük işlemleri kontrol edeceğimiz sınıf.
     private List<AccountTransaction> transactions = new List<AccountTransaction>();
 
-    public List<AccountTransaction> Transactions { get; set; }
+    //public Customer CurrentCustomer { get; set; } // bidirectional association çift taraflı ilişkilendirme yaklamışı law of demetter yasasına göre yanlış bir geliştirme tekniğidir. Nesneler arasındaki ilişkiler unidirectional assocication yapısını önerir. 
+
+
+    public IReadOnlyList<AccountTransaction> Transactions { get; set; }
 
     public Account(string accountNumber, string currency)
     {
