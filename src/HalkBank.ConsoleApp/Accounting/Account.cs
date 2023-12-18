@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace HalkBank.ConsoleApp.Accounting
 {
+  public class Entity<T>
+  where T:class,new()
+  { } // Generic sınıflarda code defensing ile T tipinin belirli bir formatta alınmasını sağlar, new() ifadesi abstract olmayan sınıfları temsil eder.
+
   public class Account
   {
     public string AccountNumber { get; init; }
@@ -21,7 +25,6 @@ namespace HalkBank.ConsoleApp.Accounting
     private List<AccountTransaction> transactions = new List<AccountTransaction>();
 
     //public Customer CurrentCustomer { get; set; } // bidirectional association çift taraflı ilişkilendirme yaklamışı law of demetter yasasına göre yanlış bir geliştirme tekniğidir. Nesneler arasındaki ilişkiler unidirectional assocication yapısını önerir. 
-
 
     public IReadOnlyList<AccountTransaction> Transactions { get; set; }
 

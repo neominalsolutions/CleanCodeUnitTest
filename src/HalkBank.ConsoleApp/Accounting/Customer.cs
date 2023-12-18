@@ -37,9 +37,9 @@ namespace HalkBank.ConsoleApp.Accounting
       //c.FirstName = "wqeasd";
     }
 
-    public void AddNewAccount(string accountNumber)
+    public void AddNewAccount(string accountNumber, string currency)
     {
-      // accounts.Add(new Account());
+      accounts.Add(new Account(accountNumber, currency));
     }
 
     //public void SetName(string name)
